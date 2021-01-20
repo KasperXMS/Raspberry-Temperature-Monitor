@@ -16,7 +16,7 @@ for((i=0;i<51;i=(i+step) ));do
 	echo "Moving the Picture$i to destination!"
 	eval "sudo mv TestFig.png /var/www/html/img/TestFig$i.png"
 	# Moving the picture to the source destination of the server Document
-	# eval "sshpass -p CGBritainnia1776 scp TestFig.png ubuntu@175.24.51.143:/home/ubuntu/Testing/Fig$i.png"
+	# eval "sshpass -p ["destination server password"] scp ["source directory"] ["destination server directory"]"
 	# Transmitting the generated picture to the server, we can change the server as we want.
 	# By the way, the usage of sshpass is in order to solve the problem of requirment of password during the scp procession
 	echo "[+] The No.$i Picture successfully transmitted!"
