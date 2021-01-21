@@ -5,9 +5,10 @@
 """
     @Author Harter·Liang
     @Date 2021/01/21
-    @Version 1.1
+    @Version 1.1.2
     @Description Draw the graph of the temperature and time from the database.
-    @Upgrades With combined functions, which bring more flexibility.
+    @Upgrades With combined functions, which bring more flexibility, and fix some problems
+              related with matplotlib
 """
 
 import matplotlib.pyplot as plt
@@ -18,9 +19,9 @@ from dbCon.dataToDB import *
 # Depending the package which includes the script dataToDB.py
 
 
-def getGraphData(tbName):
+def getGraphData(tbName, colName):
     # Changing the function for the usage of getting data from database
-    graphRawData = getData(tbName)
+    graphRawData = getData(tbName, colName)
     # Get the date from the database with the function of package dbCon
 
     xList = []
@@ -50,14 +51,18 @@ def drawGraph(contentSource, imgName, timePeriodName):
     # Attribute of the pic
     plt.savefig(str(imgName) + ".png")
     # Save the picture
+    plt.clf()
+    # Clear the picture-cache
 
 
-def drawGraphTest(tbName, imgName, timePeriodName):
+def drawGraphTest(tbName, colName, imgName, timePeriodName):
     # Sample of combined functions
-    rawContent = getGraphData(tbName)
+    rawContent = getGraphData(tbName, colName)
 
     drawGraph(rawContent, imgName, timePeriodName)
 
 
 if __name__ == "__main__":
-    drawGraphTest("TEMP_5SEC", "Sample", "Time (seconds)")
+    drawGraphTest("TEMP_5SEC", "5sec_record_id", "5sec", "Time (seconds)")
+    drawGraphTest("TEMP_HOUR", "h_record_id", "hourly", "Time (hour)")
+
