@@ -14,7 +14,7 @@ for((i=0;i<51;i=(i+step) ));do
 	# Processing the python script for generating pictures
 	# echo "[+] Transmitting for Picture$i..."
 	echo "Moving the Picture$i to destination!"
-	eval "sudo mv TestFig.png /var/www/html/img/TestFig$i.png"
+	eval "sudo mv ["Source Picture Name"] ["The path of the destination of the picture"]"
 	# Moving the picture to the source destination of the server Document
 	# eval "sshpass -p ["destination server password"] scp ["source directory"] ["destination server directory"]"
 	# Transmitting the generated picture to the server, we can change the server as we want.
