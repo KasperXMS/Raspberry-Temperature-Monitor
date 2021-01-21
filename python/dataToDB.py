@@ -8,16 +8,13 @@ import time
 '''
     @Author Harter·Liang
     @Date 2021/01/19
-    @Version 1.0
+    @Version 1.1
     @Description Provide some basic functions for SQL queries.
+    @Upgrade With more flexibility of parameters
 '''
 
-conn = pymysql.connect(user="your mysql username",
-                       password="your password",
-                       host="your mysql database host",
-                       database="your designated database name",
-                       port=3306,
-                       charset="utf-8")
+conn = pymysql.connect(host='192.168.101.192', port=3306, user='abc', passwd='shenxm345',
+                       db='temprecord', charset='utf8')
 
 
 # Connecting to the database
@@ -29,7 +26,8 @@ def closeConn():
 # Close the connection of the session
 
 
-def getData(tbName):
+def getData(tbName, colName):
+    # Add column name for more flexibility
     idSeq = 0
     date = ""
     temp = 36.123
@@ -37,7 +35,7 @@ def getData(tbName):
     curr = conn.cursor()
     dataResList = []
 
-    selectQuery = "SELECT * FROM %s ORDER BY 5sec_record_id DESC LIMIT 0,8" % tbName
+    selectQuery = "SELECT * FROM %s ORDER BY %s DESC LIMIT 0,8" % (tbName, colName)
     # Select the data from tables
     curr.execute(selectQuery)
 
@@ -135,4 +133,6 @@ def test():
 
 
 if __name__ == '__main__':
-    test()
+    # res = getData("TEMP_HOUR", "h_record_id")
+    # print(res)
+    pass
