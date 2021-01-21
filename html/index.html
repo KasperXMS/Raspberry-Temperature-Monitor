@@ -39,14 +39,18 @@
                 height: 60px;
             }
 
-            .sec5picdisplay{
-                vertical-align: middle;
-                text-align: center;
+            .picframe{
                 position: absolute;
                 left: 20px;
                 right: 20px;
                 top: 250px;
-                height: 130px;
+                height: 1000px;
+            }
+
+            .picdisplay{
+                vertical-align: middle;
+                text-align: center;
+                height: 500px;
             }
         </style>
     </head>
@@ -63,8 +67,13 @@
         <div class="tempvaluedisp">
             <span id="tempvalue">12.125</span><span style="font-size: 24px;">℃</span>
         </div>
-        <div class="sec5picdisplay" id="5secpic">
-            <img src="img/TestFig.png" alt="abaaba">
+        <div class="picframe">
+            <div class="picdisplay" id="5secpic">
+                <img src="img/5sec.png" alt="abaaba">
+            </div>
+            <div class="picdisplay" id="hourpic">
+                <img src="img/hourly.png">
+            </div>
         </div>
         <script>
             function updateTemp(){
@@ -100,19 +109,13 @@
             updateTime()
         </script>
         <script>
-            function update5secPic(){
-                var xmlhttp3 = new XMLHttpRequest();
-                xmlhttp3.onreadystatechange = function(){
-                    if(xmlhttp3.readyState == 4 && xmlhttp3.status == 200){
-                        document.getElementById("5secpic").innerHTML = xmlhttp3.responseText;
-                    }
-                }
-                xmlhttp3.open("GET", "img/getImg.php", true);
-                xmlhttp3.send();
-                setTimeout(update5secPic, 20000);
+            function updatePic(){
+                document.getElementById("5secpic").innerHTML = "<img src=\"img/5sec.png?m=" + Math.random() + "\">";
+                document.getElementById("hourpic").innerHTML = "<img src=\"img/hourly.png?m=" + Math.random() + "\">";
+                setTimeout(updatePic, 20000);
             }
 
-            update5secPic()
+            updatePic()
         </script>
     </body>
 
