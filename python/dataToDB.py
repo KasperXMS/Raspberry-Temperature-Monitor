@@ -12,8 +12,12 @@ import time
     @Description Provide some basic functions for SQL queries.
 '''
 
-conn = pymysql.connect(host='127.0.0.1', port=3306, user='abc', passwd='shenxm345',
-                       db='temprecord', charset='utf8')
+conn = pymysql.connect(user="your mysql username",
+                       password="your password",
+                       host="your mysql database host",
+                       database="your designated database name",
+                       port=3306,
+                       charset="utf-8")
 
 
 # Connecting to the database
