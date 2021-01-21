@@ -1,0 +1,119 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="Pragma" content="no-cache">
+        <meta http-equiv="Cache-Control" content="no-cache">
+        <meta http-equiv="Expires" content="0">
+        <title>Temprature Test Demo</title>
+        <style>
+            .headtitle{
+                background-color: black;
+                color: white;
+                font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+                font-size: 28px;
+                text-align: center;
+                border: none;
+                position: absolute;
+                left: 0px;
+                right: 0px;
+                top: 0px;
+                height: 70px;
+            }
+
+            .datetimedisp{
+                background-color: black;
+                color: white;
+                font-size: 20px;
+                text-align: center;
+            }
+
+            .tempvaluedisp{
+                color: black;
+                font-size: 32px;
+                text-align: center;
+                position: absolute;
+                left: 0%;
+                right: 0%;
+                top: 160px;
+                height: 60px;
+            }
+
+            .sec5picdisplay{
+                vertical-align: middle;
+                text-align: center;
+                position: absolute;
+                left: 20px;
+                right: 20px;
+                top: 250px;
+                height: 130px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="headtitle">
+            <div>
+                Instant temprature display
+            </div>
+            <div style="font-size: 20px;">
+                Current time: UTC+8 <span id="time">2021-01-20 00:00:00</span>
+            </div>
+        </div>
+        <div class="tempvaluedisp">
+            <span id="tempvalue">12.125</span><span style="font-size: 24px;">℃</span>
+        </div>
+        <div class="sec5picdisplay" id="5secpic">
+            <img src="img/TestFig.png" alt="abaaba">
+        </div>
+        <script>
+            function updateTemp(){
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.onreadystatechange = function(){
+                    if(xmlhttp.readyState == 4 && xmlhttp.status == 200){
+                        document.getElementById("tempvalue").innerHTML = xmlhttp.responseText;
+                    }
+                }
+                xmlhttp.open("GET", "getDBData.php", true);
+                xmlhttp.send();
+                
+                setTimeout(updateTemp, 5000);
+            }
+    
+            updateTemp()
+    
+        </script>
+        <script>
+            function updateTime(){
+                var xmlhttp1 = new XMLHttpRequest();
+                xmlhttp1.onreadystatechange = function(){
+                    if(xmlhttp1.readyState == 4 && xmlhttp1.status == 200){
+                        document.getElementById("time").innerHTML = xmlhttp1.responseText;
+                    }
+                }
+                xmlhttp1.open("GET", "getDateTime.php", true);
+                xmlhttp1.send();
+
+                setTimeout(updateTime, 1000);
+            }
+
+            updateTime()
+        </script>
+        <script>
+            function update5secPic(){
+                var xmlhttp3 = new XMLHttpRequest();
+                xmlhttp3.onreadystatechange = function(){
+                    if(xmlhttp3.readyState == 4 && xmlhttp3.status == 200){
+                        document.getElementById("5secpic").innerHTML = xmlhttp3.responseText;
+                    }
+                }
+                xmlhttp3.open("GET", "img/getImg.php", true);
+                xmlhttp3.send();
+                setTimeout(update5secPic, 20000);
+            }
+
+            update5secPic()
+        </script>
+    </body>
+
+</html>
